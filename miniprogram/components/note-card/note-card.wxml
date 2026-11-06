@@ -7,10 +7,12 @@
           <text class="audio-label">语音</text>
         </view>
         <view class="audio-wave-row">
-          <view class="waveform">
-            <view wx:for="{{note.waveform}}" wx:key="index" class="wave-bar" style="height: {{item}}rpx;"></view>
+          <view class="audio-wave-box">
+            <view class="waveform">
+              <view wx:for="{{note.waveform}}" wx:key="index" class="wave-bar" style="height: {{item}}rpx;"></view>
+            </view>
+            <text class="audio-duration">{{note.duration}}</text>
           </view>
-          <text class="audio-duration">{{note.duration}}</text>
         </view>
         <text class="note-excerpt audio-transcript">{{note.excerpt}}</text>
         <view class="note-meta">

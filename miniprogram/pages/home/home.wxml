@@ -4,7 +4,7 @@
     <view class="quick-grid">
       <button wx:for="{{quickActions}}" wx:key="id" class="quick-item" data-title="{{item.title}}" bindtap="onQuickAction">
         <view class="quick-icon"><icon name="{{item.icon}}" size="37" /></view>
-        <text>{{item.title}}</text>
+        <text class="quick-label quick-label-{{item.tone}}">{{item.title}}</text>
       </button>
     </view>
     <section-toolbar style="display: block; width: 100%; box-sizing: border-box; flex-shrink: 0;" title="{{listTitle}}" bind:filter="onFilter" bind:sort="onSort" />

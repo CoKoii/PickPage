@@ -23,9 +23,10 @@
 .note-cover { width: 140rpx; height: 140rpx; flex: 0 0 140rpx; border-radius: 21rpx; background: #edf0ee; }
 .audio-content { width: 100%; min-width: 0; display: flex; flex-direction: column; }
 .audio-label { flex: 0 0 auto; color: #08a94f; font-size: 21rpx; }
-.audio-wave-row { display: flex; align-items: center; gap: 16rpx; margin-top: 12rpx; }
-.waveform { height: 40rpx; min-width: 0; flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 4rpx; overflow: hidden; }
-.wave-bar { width: 4rpx; min-width: 2rpx; flex: 1 1 0; border-radius: 4rpx; background: #08c95b; opacity: .82; }
+.audio-wave-row { margin-top: 12rpx; }
+.audio-wave-box { width: 100%; min-width: 0; height: 72rpx; display: flex; align-items: center; gap: 18rpx; padding: 0 18rpx; box-sizing: border-box; border: 1rpx solid #e2e5e3; border-radius: 20rpx; background: #fff; }
+.waveform { min-width: 0; flex: 1; height: 48rpx; display: flex; align-items: center; justify-content: flex-start; gap: 5rpx; overflow: hidden; }
+.wave-bar { width: 6rpx; min-width: 6rpx; flex: 0 0 6rpx; border-radius: 999rpx; background: #45c783; opacity: .78; transform: scaleY(1.15); transform-origin: center; }
 .audio-duration { flex: 0 0 auto; color: #686d6b; font-size: 22rpx; font-variant-numeric: tabular-nums; }
 .audio-transcript { margin-top: 10rpx; }
 .audio-content .note-meta { margin-top: 14rpx; }

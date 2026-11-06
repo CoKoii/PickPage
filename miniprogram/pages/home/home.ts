@@ -6,10 +6,10 @@ Page({
     openLevel: 0,
     listTitle: '全部笔记',
     quickActions: [
-      { id: 'stats', title: '记录统计', icon: 'calendar-days' },
-      { id: 'tags', title: '标签', icon: 'map-pin' },
-      { id: 'collections', title: '小组件', icon: 'folder' },
-      { id: 'api', title: 'MCP & API', icon: 'code-xml' },
+      { id: 'stats', title: '记录统计', icon: 'calendar-days-green', tone: 'green' },
+      { id: 'tags', title: '标签', icon: 'map-pin-blue', tone: 'blue' },
+      { id: 'collections', title: '小组件', icon: 'folder-purple', tone: 'purple' },
+      { id: 'api', title: 'MCP & API', icon: 'code-xml-orange', tone: 'orange' },
     ],
     notes: [
       { id: 'n1', title: '把思考变成行动：第一步是记录', excerpt: '记录下今天的想法：如何让产品更有温度？', tag: '灵感', tagTone: 'green', source: '个人', time: '今天 14:30', cover: '/assets/covers/idea.jpg' },
