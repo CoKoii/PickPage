@@ -9,7 +9,7 @@
         <view class="audio-wave-row">
           <view class="audio-wave-box">
             <view class="waveform">
-              <view wx:for="{{note.waveform}}" wx:key="index" class="wave-bar" style="height: {{item}}rpx;"></view>
+              <view wx:for="{{note.waveform || []}}" wx:key="index" class="wave-bar" style="height: {{item}}rpx;"></view>
             </view>
             <text class="audio-duration">{{note.duration}}</text>
           </view>
