@@ -4,7 +4,6 @@ Page({
     refreshing: false,
     openNoteId: '',
     openLevel: 0,
-    activeSpace: 'personal',
     listTitle: '全部笔记',
     quickActions: [
       { id: 'stats', title: '记录统计', icon: 'calendar-days' },
@@ -85,10 +84,6 @@ Page({
         },
       })
     }
-  },
-  onSpaceChange(event: WechatMiniprogram.CustomEvent) {
-    const value = event.detail.value
-    this.setData({ activeSpace: value, listTitle: value === 'personal' ? '全部笔记' : '团队笔记' })
   },
   onQuickAction(event: WechatMiniprogram.TouchEvent) {
     wx.showToast({ title: `${event.currentTarget.dataset.title}即将开放`, icon: 'none' })
