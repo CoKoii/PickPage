@@ -1,0 +1,55 @@
+<view class="note-row {{dragging ? 'dragging' : ''}}" bindtouchstart="onTouchStart" capture-bind:touchmove="onTouchMove" catchtouchmove="{{dragAxis === 'horizontal' ? 'noop' : ''}}" bindtouchend="onTouchEnd" bindtouchcancel="onTouchEnd">
+  <view class="note-card {{dragging ? 'dragging' : ''}}" style="transform: translate3d({{translateX}}px, 0, 0);">
+    <block wx:if="{{note.type === 'voice'}}">
+      <view class="audio-content">
+        <view class="audio-heading">
+          <text class="note-title">{{note.title}}</text>
+          <text class="audio-label">语音</text>
+        </view>
+        <view class="audio-wave-row">
+          <view class="waveform">
+            <view wx:for="{{note.waveform}}" wx:key="index" class="wave-bar" style="height: {{item}}rpx;"></view>
+          </view>
+          <text class="audio-duration">{{note.duration}}</text>
+        </view>
+        <text class="note-excerpt audio-transcript">{{note.excerpt}}</text>
+        <view class="note-meta">
+          <text class="tag {{note.tagTone}}">{{note.tag}}</text>
+          <text wx:if="{{note.isPinned}}" class="pinned-label">置顶</text>
+          <text class="meta-source">{{note.source}}</text>
+          <text class="meta-time">{{note.time}}</text>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="note-body">
+        <view class="note-heading">
+          <text class="note-title">{{note.title}}</text>
+          <text wx:if="{{note.isPinned}}" class="pinned-label">置顶</text>
+        </view>
+        <text class="note-excerpt">{{note.excerpt}}</text>
+        <view class="note-meta">
+          <text class="tag {{note.tagTone}}">{{note.tag}}</text>
+          <text class="meta-source">{{note.source}}</text>
+          <text class="meta-time">{{note.time}}</text>
+        </view>
+      </view>
+      <image wx:if="{{note.cover}}" class="note-cover" src="{{note.cover}}" mode="aspectFill" />
+    </block>
+  </view>
+
+  <view class="note-action-rail">
+    <view class="action-slot delete-slot">
+      <view class="action-item delete-action" style="opacity: {{deleteVisible ? 1 : 0}}; transform: scale({{deleteVisible ? 1 : 0}}); transition-delay: {{deleteDelay}}ms;" bindtap="onDeleteTap" aria-role="button" aria-label="删除">
+        <view class="action-circle"><image class="action-icon" src="/assets/png-icons/trash-2.png" mode="aspectFit" /></view>
+        <text class="action-label">删除</text>
+      </view>
+    </view>
+    <view class="action-slot pin-slot">
+      <view class="action-item pin-action" style="opacity: {{pinVisible ? 1 : 0}}; transform: scale({{pinVisible ? 1 : 0}}); transition-delay: {{pinDelay}}ms;" bindtap="onPinTap" aria-role="button" aria-label="{{note.isPinned ? '取消置顶' : '置顶'}}">
+        <view class="action-circle"><image class="action-icon" src="/assets/png-icons/bookmark.png" mode="aspectFit" /></view>
+        <text class="action-label">{{note.isPinned ? '取消置顶' : '置顶'}}</text>
+      </view>
+    </view>
+  </view>
+</view>

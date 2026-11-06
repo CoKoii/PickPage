@@ -1,0 +1,31 @@
+.note-row { position: relative; width: 100%; overflow: hidden; border-radius: 25rpx; }
+.note-action-rail { position: absolute; z-index: 0; top: 0; right: 0; bottom: 0; width: 116px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; }
+.action-slot { width: 48px; height: 68px; flex: 0 0 48px; }
+.action-item { box-sizing: border-box; width: 48px; height: 68px; flex: 0 0 48px; line-height: normal; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; transform-origin: center center; transition: opacity 240ms cubic-bezier(.4,0,.2,1), transform 240ms cubic-bezier(.4,0,.2,1); }
+.pin-action { color: #fff; }
+.delete-action { color: #fff; }
+.action-circle { width: 40px; height: 40px; flex: 0 0 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.pin-action .action-circle { background: #438dbd; }
+.delete-action .action-circle { background: #f0444b; }
+.action-icon { width: 21px; height: 21px; }
+.action-label { color: #929795; font-size: 10px; line-height: 14px; white-space: nowrap; }
+.note-card { position: relative; z-index: 1; width: 100%; min-height: 176rpx; display: flex; align-items: stretch; gap: 18rpx; padding: 25rpx 20rpx 21rpx 24rpx; box-sizing: border-box; border-radius: 25rpx; background: #fff; box-shadow: 0 5rpx 18rpx rgba(28, 50, 39, .025); transition: transform 600ms cubic-bezier(.18,.89,.32,1); }
+.note-row.dragging .note-card { transition: none; }
+.note-body { min-width: 0; flex: 1; display: flex; flex-direction: column; }
+.note-heading, .audio-heading { min-width: 0; display: flex; align-items: center; gap: 10rpx; }
+.note-title { min-width: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 32rpx; line-height: 43rpx; font-weight: 700; }
+.note-excerpt { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 4rpx; color: #686d6b; font-size: 24rpx; line-height: 34rpx; }
+.note-meta { display: flex; align-items: center; gap: 14rpx; margin-top: auto; color: #929795; font-size: 21rpx; }
+.tag { padding: 3rpx 13rpx; border-radius: 18rpx; font-size: 20rpx; line-height: 29rpx; }
+.tag.green { color: #08a94f; background: #d9f9e6; }.tag.purple { color: #7d52d7; background: #e8ddff; }.tag.blue { color: #3879db; background: #dceaff; }
+.pinned-label { flex: 0 0 auto; color: #08a94f; font-size: 20rpx; }
+.meta-source { max-width: 100rpx; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.note-cover { width: 140rpx; height: 140rpx; flex: 0 0 140rpx; border-radius: 21rpx; background: #edf0ee; }
+.audio-content { width: 100%; min-width: 0; display: flex; flex-direction: column; }
+.audio-label { flex: 0 0 auto; color: #08a94f; font-size: 21rpx; }
+.audio-wave-row { display: flex; align-items: center; gap: 16rpx; margin-top: 12rpx; }
+.waveform { height: 40rpx; min-width: 0; flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 4rpx; overflow: hidden; }
+.wave-bar { width: 4rpx; min-width: 2rpx; flex: 1 1 0; border-radius: 4rpx; background: #08c95b; opacity: .82; }
+.audio-duration { flex: 0 0 auto; color: #686d6b; font-size: 22rpx; font-variant-numeric: tabular-nums; }
+.audio-transcript { margin-top: 10rpx; }
+.audio-content .note-meta { margin-top: 14rpx; }

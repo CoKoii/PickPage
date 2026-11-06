@@ -1,18 +1,34 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/home/home",
+    "pages/team/team",
+    "pages/notifications/notifications",
+    "pages/profile/profile"
   ],
   "window": {
+    "navigationStyle": "custom",
     "navigationBarTextStyle": "black",
-    "navigationStyle": "custom"
+    "backgroundColor": "#f5f6f7",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#929795",
+    "selectedColor": "#08c95b",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "position": "bottom",
+    "list": [
+      { "pagePath": "pages/home/home", "text": "首页", "iconPath": "assets/png-icons/house.png", "selectedIconPath": "assets/png-icons/house-active.png" },
+      { "pagePath": "pages/team/team", "text": "团队", "iconPath": "assets/png-icons/users-round.png", "selectedIconPath": "assets/png-icons/users-round-active.png" },
+      { "pagePath": "pages/notifications/notifications", "text": "通知", "iconPath": "assets/png-icons/bell.png", "selectedIconPath": "assets/png-icons/bell-active.png" },
+      { "pagePath": "pages/profile/profile", "text": "我的", "iconPath": "assets/png-icons/user-round.png", "selectedIconPath": "assets/png-icons/user-round-active.png" }
+    ]
   },
   "style": "v2",
   "rendererOptions": {
     "skyline": {
       "defaultDisplayBlock": true,
       "defaultContentBox": true,
-      "tagNameStyleIsolation": "legacy",
       "disableABTest": true,
       "sdkVersionBegin": "3.0.0",
       "sdkVersionEnd": "15.255.255"

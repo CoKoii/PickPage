@@ -1,0 +1,1 @@
+<image wx:if="{{name}}" class="icon" src="/assets/png-icons/{{name}}.png" mode="aspectFit" style="width: {{size}}rpx; height: {{size}}rpx; opacity: {{opacity}};" />

@@ -1,0 +1,4 @@
+<view class="space-switcher">
+  <button class="space-tab {{value === 'personal' ? 'active' : ''}}" data-value="personal" bindtap="onChange"><icon name="{{value === 'personal' ? 'user-round-white' : 'user-round'}}" size="30" /><text>个人笔记</text></button>
+  <button class="space-tab {{value === 'team' ? 'active' : ''}}" data-value="team" bindtap="onChange"><icon name="{{value === 'team' ? 'users-round-white' : 'users-round'}}" size="31" /><text>团队空间</text><view class="online-dot"></view></button>
+</view>
