@@ -2,6 +2,9 @@
   <view class="note-card" style="transform: translate3d({{translateX}}px, 0, 0);">
     <view class="{{note.type === 'voice' ? 'audio-content' : 'note-body'}}">
       <text class="note-content {{note.type === 'voice' ? 'audio-transcript' : ''}}">{{note.excerpt}}</text>
+      <view wx:if="{{note.type === 'image'}}" class="note-images">
+        <image class="note-image" src="{{note.image}}" mode="aspectFill" />
+      </view>
       <view wx:if="{{note.type === 'voice'}}" class="audio-wave-row">
         <view class="audio-wave-box">
           <view class="waveform">
@@ -10,9 +13,13 @@
           <text class="audio-duration">{{note.duration}}</text>
         </view>
       </view>
+      <view wx:if="{{note.type === 'voice' && note.translation}}" class="note-translation">
+        <text class="translation-label">译文</text>
+        <text class="translation-text">{{note.translation}}</text>
+      </view>
       <view class="note-meta">
         <text class="tag {{note.tagTone}}">{{note.tag}}</text>
-        <text wx:if="{{note.type === 'voice' && note.isPinned}}" class="pinned-label">置顶</text>
+        <text wx:if="{{note.isPinned}}" class="pinned-label">置顶</text>
         <text class="meta-source">{{note.source}}</text>
         <text class="meta-time">{{note.time}}</text>
       </view>

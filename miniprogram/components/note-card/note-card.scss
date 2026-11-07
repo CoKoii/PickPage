@@ -23,6 +23,11 @@
 .note-row.dragging .note-card { transition: none; }
 .note-row.dragging .action-item { transition: none; }
 .note-body { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 14rpx; }
+.note-images { width: 100%; height: 150px; margin-top: 2px; overflow: hidden; border-radius: 12px; }
+.note-image { display: block; width: 100%; height: 100%; background: #eef1ef; }
+.note-translation { display: flex; flex-direction: column; gap: 3px; margin-top: 9px; padding-top: 8px; border-top: 1px solid #edf0ee; }
+.translation-label { color: #08a94f; font-size: 20rpx; line-height: 28rpx; }
+.translation-text { color: #686d6b; font-size: 23rpx; line-height: 34rpx; }
 .note-content { margin: 0; color: #171918; font-size: 28rpx; line-height: 42rpx; overflow-wrap: break-word; }
 .note-meta { display: flex; align-items: center; gap: 14rpx; margin-top: 0; color: #929795; font-size: 21rpx; }
 .tag { padding: 3rpx 13rpx; border-radius: 18rpx; font-size: 20rpx; line-height: 29rpx; }
