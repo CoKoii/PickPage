@@ -117,7 +117,6 @@ Component({
       const rawReveal = Math.max(0, -(this.data.startOffset + endX - this.data.startX))
       // Velocity may choose an open/closed snap, but must never authorize deletion.
       if (this.data.armed && rawReveal >= TRIGGER_THRESHOLD) {
-        wx.vibrateShort({ type: 'light' })
         this.setData(Object.assign({ dragging: false, armed: false, dragAxis: '' }, motion(0, this.data.maxReveal)), () => {
           this.triggerEvent('action', { type: 'delete', id: this.data.note.id })
         })
