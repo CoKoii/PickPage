@@ -9,20 +9,16 @@
 .delete-action .action-circle { background: #f0444b; }
 .action-icon { width: 21px; height: 21px; }
 .action-label { color: #929795; font-size: 10px; line-height: 14px; white-space: nowrap; }
-.note-card { position: relative; z-index: 1; width: 100%; min-height: 176rpx; display: flex; align-items: stretch; gap: 18rpx; padding: 25rpx 20rpx 21rpx 24rpx; box-sizing: border-box; border-radius: 25rpx; background: #fff; box-shadow: 0 5rpx 18rpx rgba(28, 50, 39, .025); transition: transform 600ms cubic-bezier(.18,.89,.32,1); }
+.note-card { position: relative; z-index: 1; width: 100%; display: flex; align-items: stretch; gap: 18rpx; padding: 25rpx 20rpx 21rpx 24rpx; box-sizing: border-box; border-radius: 25rpx; background: #fff; box-shadow: 0 5rpx 18rpx rgba(28, 50, 39, .025); transition: transform 600ms cubic-bezier(.18,.89,.32,1); }
 .note-row.dragging .note-card { transition: none; }
-.note-body { min-width: 0; flex: 1; display: flex; flex-direction: column; }
-.note-heading, .audio-heading { min-width: 0; display: flex; align-items: center; gap: 10rpx; }
-.note-title { min-width: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 32rpx; line-height: 43rpx; font-weight: 700; }
-.note-excerpt { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 4rpx; color: #686d6b; font-size: 24rpx; line-height: 34rpx; }
-.note-meta { display: flex; align-items: center; gap: 14rpx; margin-top: auto; color: #929795; font-size: 21rpx; }
+.note-body { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 14rpx; }
+.note-content { margin: 0; color: #171918; font-size: 28rpx; line-height: 42rpx; overflow-wrap: break-word; }
+.note-meta { display: flex; align-items: center; gap: 14rpx; margin-top: 0; color: #929795; font-size: 21rpx; }
 .tag { padding: 3rpx 13rpx; border-radius: 18rpx; font-size: 20rpx; line-height: 29rpx; }
 .tag.green { color: #08a94f; background: #d9f9e6; }.tag.purple { color: #7d52d7; background: #e8ddff; }.tag.blue { color: #3879db; background: #dceaff; }
 .pinned-label { flex: 0 0 auto; color: #08a94f; font-size: 20rpx; }
 .meta-source { max-width: 100rpx; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.note-cover { width: 140rpx; height: 140rpx; flex: 0 0 140rpx; border-radius: 21rpx; background: #edf0ee; }
 .audio-content { width: 100%; min-width: 0; display: flex; flex-direction: column; }
-.audio-label { flex: 0 0 auto; color: #08a94f; font-size: 21rpx; }
 .audio-wave-row { margin-top: 12rpx; }
 .audio-wave-box { width: 100%; min-width: 0; height: 72rpx; display: flex; align-items: center; gap: 18rpx; padding: 0 18rpx; box-sizing: border-box; border: 1rpx solid #e2e5e3; border-radius: 20rpx; background: #fff; }
 .waveform { min-width: 0; flex: 1; height: 48rpx; display: flex; align-items: center; justify-content: flex-start; gap: 5rpx; overflow: hidden; }

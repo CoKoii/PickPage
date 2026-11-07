@@ -2,10 +2,7 @@
   <view class="note-card {{dragging ? 'dragging' : ''}}" style="transform: translate3d({{translateX}}px, 0, 0);">
     <block wx:if="{{note.type === 'voice'}}">
       <view class="audio-content">
-        <view class="audio-heading">
-          <text class="note-title">{{note.title}}</text>
-          <text class="audio-label">语音</text>
-        </view>
+        <text class="note-content audio-transcript">{{note.excerpt}}</text>
         <view class="audio-wave-row">
           <view class="audio-wave-box">
             <view class="waveform">
@@ -14,7 +11,6 @@
             <text class="audio-duration">{{note.duration}}</text>
           </view>
         </view>
-        <text class="note-excerpt audio-transcript">{{note.excerpt}}</text>
         <view class="note-meta">
           <text class="tag {{note.tagTone}}">{{note.tag}}</text>
           <text wx:if="{{note.isPinned}}" class="pinned-label">置顶</text>
@@ -25,18 +21,13 @@
     </block>
     <block wx:else>
       <view class="note-body">
-        <view class="note-heading">
-          <text class="note-title">{{note.title}}</text>
-          <text wx:if="{{note.isPinned}}" class="pinned-label">置顶</text>
-        </view>
-        <text class="note-excerpt">{{note.excerpt}}</text>
+        <text class="note-content">{{note.excerpt}}</text>
         <view class="note-meta">
           <text class="tag {{note.tagTone}}">{{note.tag}}</text>
           <text class="meta-source">{{note.source}}</text>
           <text class="meta-time">{{note.time}}</text>
         </view>
       </view>
-      <image wx:if="{{note.cover}}" class="note-cover" src="{{note.cover}}" mode="aspectFill" />
     </block>
   </view>
 
