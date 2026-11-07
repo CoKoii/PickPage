@@ -1,16 +1,27 @@
 .note-row { position: relative; width: 100%; overflow: hidden; border-radius: 25rpx; }
-.note-action-rail { position: absolute; z-index: 0; top: 0; right: 0; bottom: 0; width: 116px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; }
+.note-action-rail { position: absolute; z-index: 0; top: 0; right: 0; bottom: 0; width: 116px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; transition: width 600ms cubic-bezier(.18,.89,.32,1); }
 .action-slot { width: 48px; height: 68px; flex: 0 0 48px; }
-.action-item { box-sizing: border-box; width: 48px; height: 68px; flex: 0 0 48px; line-height: normal; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; transform-origin: center center; transition: opacity 200ms cubic-bezier(.4,0,.2,1), transform 200ms cubic-bezier(.4,0,.2,1); }
+.action-item { box-sizing: border-box; width: 48px; height: 68px; flex: 0 0 48px; line-height: normal; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.action-item { transition: opacity 120ms ease-out; }
 .pin-action { color: #fff; }
-.delete-action { color: #fff; }
 .action-circle { width: 40px; height: 40px; flex: 0 0 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .pin-action .action-circle { background: #09c161; }
-.delete-action .action-circle { background: #f0444b; }
 .action-icon { width: 21px; height: 21px; }
 .action-label { color: #929795; font-size: 10px; line-height: 14px; white-space: nowrap; }
+.delete-slot { min-width: 48px; flex: 1 1 0; margin-left: 4px; }
+.delete-action { position: relative; width: 100%; height: 68px; color: #fff; gap: 0; background: transparent; }
+.delete-background { position: absolute; left: 4px; right: 4px; top: 5px; height: 40px; border-radius: 20px; overflow: hidden; }
+.delete-background-fill { width: 100%; height: 40px; border-radius: 20px; background: #f0444b; }
+/* Percentage positioning stays centered as Flex resizes, without chasing touch updates. */
+.delete-content { position: absolute; left: 50%; margin-left: -24px; top: 0; width: 48px; height: 68px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; z-index: 1; transition: left 240ms cubic-bezier(.22,.61,.36,1); }
+.delete-content.armed { left: 32px; }
+.delete-action .action-circle { background: transparent; }
+.delete-label { opacity: 1; transition: opacity 240ms cubic-bezier(.22,.61,.36,1); }
+.delete-content.armed .delete-label { opacity: 0; }
 .note-card { position: relative; z-index: 1; width: 100%; display: flex; align-items: stretch; gap: 18rpx; padding: 25rpx 20rpx 21rpx 24rpx; box-sizing: border-box; border-radius: 25rpx; background: #fff; box-shadow: 0 5rpx 18rpx rgba(28, 50, 39, .025); transition: transform 600ms cubic-bezier(.18,.89,.32,1); }
+.note-row.dragging .note-action-rail { transition: none; }
 .note-row.dragging .note-card { transition: none; }
+.note-row.dragging .action-item { transition: none; }
 .note-body { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 14rpx; }
 .note-content { margin: 0; color: #171918; font-size: 28rpx; line-height: 42rpx; overflow-wrap: break-word; }
 .note-meta { display: flex; align-items: center; gap: 14rpx; margin-top: 0; color: #929795; font-size: 21rpx; }

@@ -1,13 +1,13 @@
 <view class="home-shell">
   <view class="home-fixed">
-    <home-header style="display: block; width: 100%; box-sizing: border-box; flex-shrink: 0;" top-inset="{{headerTopInset}}" />
+    <home-header class="home-section" top-inset="{{headerTopInset}}" />
     <view class="quick-grid">
       <button wx:for="{{quickActions}}" wx:key="id" class="quick-item" data-title="{{item.title}}" bindtap="onQuickAction">
         <view class="quick-icon"><icon name="{{item.icon}}" size="37" /></view>
         <text class="quick-label quick-label-{{item.tone}}">{{item.title}}</text>
       </button>
     </view>
-    <section-toolbar style="display: block; width: 100%; box-sizing: border-box; flex-shrink: 0;" title="{{listTitle}}" bind:filter="onFilter" bind:sort="onSort" />
+    <section-toolbar class="home-section" title="{{listTitle}}" bind:filter="onFilter" bind:sort="onSort" />
   </view>
   <scroll-view class="home-scroll" scroll-y enhanced show-scrollbar="false" refresher-enabled="{{true}}" refresher-triggered="{{refreshing}}" refresher-background="#f5f6f7" bindrefresherrefresh="onPullDownRefresh">
     <view class="note-scroll-content">

@@ -1,18 +1,21 @@
 const DEFAULT_MAX_REVEAL = 116
-const RESISTANCE_CAP = 8
+const RUBBER_BAND_POWER = 0.7
+const ACTION_VISIBLE_START = 50
+const ACTION_VISIBLE_END = 100
+const EXPAND_THRESHOLD = 50
+const TRIGGER_THRESHOLD = 280
 const liveComponents = new WeakSet<object>()
 
-type TouchEventWithPropagation = WechatMiniprogram.TouchEvent & {
-  stopPropagation?: () => void
-}
+type TouchPoint = { clientX?: number, clientY?: number, pageX?: number, pageY?: number }
+const touchX = (touch: TouchPoint) => typeof touch.clientX === 'number' ? touch.clientX : (touch.pageX || 0)
+const touchY = (touch: TouchPoint) => typeof touch.clientY === 'number' ? touch.clientY : (touch.pageY || 0)
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value))
 
-type ActionDirection = 'show' | 'hide'
-
-const actionMotion = (reveal: number, direction: ActionDirection) => ({
-  pinVisible: reveal >= (direction === 'show' ? 60 : 108),
-  deleteVisible: reveal >= (direction === 'show' ? 8 : 56),
-  pinDelay: direction === 'show' ? 100 : 110,
-  deleteDelay: direction === 'show' ? 20 : 0,
+// Card and rail are the only animated geometry. All children use CSS layout.
+const motion = (reveal: number, maxReveal: number) => ({
+  translateX: -reveal,
+  railWidth: Math.max(maxReveal, reveal),
+  actionOpacity: clamp((reveal - ACTION_VISIBLE_START) / (ACTION_VISIBLE_END - ACTION_VISIBLE_START), 0, 1),
 })
 
 Component({
@@ -23,114 +26,116 @@ Component({
       value: 0,
       observer(level: number) {
         const reveal = level > 0 ? this.data.maxReveal : 0
-        const target = -reveal
-        const currentReveal = Math.max(0, -this.data.translateX)
-        const direction = reveal > currentReveal ? 'show' : reveal < currentReveal ? 'hide' : this.data.actionDirection
-        if (target === this.data.translateX && !this.data.dragging) return
-        this.setData(Object.assign({ translateX: target, dragging: false, actionDirection: direction }, actionMotion(reveal, direction)))
+        if (-reveal === this.data.translateX && !this.data.dragging) return
+        this.setData(Object.assign({ dragging: false, armed: false, dragAxis: '' }, motion(reveal, this.data.maxReveal)))
       },
     },
   },
   data: {
     translateX: 0,
+    railWidth: DEFAULT_MAX_REVEAL,
+    maxReveal: DEFAULT_MAX_REVEAL,
+    actionOpacity: 0,
     dragging: false,
-    actionDirection: 'show',
-    pinVisible: false,
-    deleteVisible: false,
-    pinDelay: 100,
-    deleteDelay: 20,
+    armed: false,
+    gestureMoved: false,
     startX: 0,
     startY: 0,
     startOffset: 0,
+    lastX: 0,
+    lastTime: 0,
     dragAxis: '',
-    maxReveal: DEFAULT_MAX_REVEAL,
   },
   lifetimes: {
-    attached() {
-      liveComponents.add(this)
-    },
+    attached() { liveComponents.add(this) },
     ready() {
       const query = this.createSelectorQuery()
       query.select('.note-row').boundingClientRect()
       query.select('.note-action-rail').boundingClientRect()
       query.exec((rects) => {
-        if (!liveComponents.has(this) || !Array.isArray(rects) || rects.length < 2) return
-        const row = rects[0]
-        const rail = rects[1]
-        if (!row || !rail) return
-        const maxReveal = Math.max(0, row.right - rail.left)
-        const reveal = this.properties.revealLevel > 0 ? maxReveal : Math.max(0, -this.data.translateX)
-        this.setData(Object.assign({ maxReveal, translateX: -reveal }, actionMotion(reveal, this.data.actionDirection)))
+        if (!liveComponents.has(this) || !Array.isArray(rects) || !rects[0] || !rects[1]) return
+        const maxReveal = Math.max(0, rects[0].right - rects[1].left)
+        const reveal = this.properties.revealLevel > 0 ? maxReveal : 0
+        if (!this.data.dragging) this.setData(Object.assign({ maxReveal }, motion(reveal, maxReveal)))
       })
     },
-    detached() {
-      liveComponents.delete(this)
-    },
+    detached() { liveComponents.delete(this) },
   },
   methods: {
     noop() {},
     onTouchStart(event: WechatMiniprogram.TouchEvent) {
-      const touch = event.touches?.[0]
+      const touch = event.touches && event.touches[0]
       if (!touch) return
       this.setData({
-        startX: touch.clientX,
-        startY: touch.clientY,
+        startX: touchX(touch), startY: touchY(touch),
         startOffset: this.data.translateX,
-        dragAxis: '',
+        lastX: touchX(touch), lastTime: event.timeStamp || Date.now(),
+        gestureMoved: false, dragAxis: '',
       })
     },
-    onTouchMove(event: TouchEventWithPropagation) {
-      const touch = event.touches?.[0]
+    onTouchMove(event: WechatMiniprogram.TouchEvent) {
+      const touch = event.touches && event.touches[0]
       if (!touch) return
-      const dx = touch.clientX - this.data.startX
-      const dy = touch.clientY - this.data.startY
+      const x = touchX(touch)
+      const dx = x - this.data.startX
+      const dy = touchY(touch) - this.data.startY
       let axis = this.data.dragAxis
       if (!axis && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
         axis = Math.abs(dx) > Math.abs(dy) ? 'horizontal' : 'vertical'
       }
       if (axis !== 'horizontal') {
-        if (axis !== this.data.dragAxis) this.setData({ dragAxis: axis })
+        if (axis !== this.data.dragAxis) this.setData({ dragAxis: axis, gestureMoved: true })
         return
       }
-      event.stopPropagation?.()
       const rawReveal = Math.max(0, -(this.data.startOffset + dx))
-      const maxReveal = this.data.maxReveal
-      const resistedReveal = rawReveal <= maxReveal
-        ? rawReveal
-        : maxReveal + Math.min(RESISTANCE_CAP, (rawReveal - maxReveal) * 0.16)
-      const currentReveal = Math.max(0, -this.data.translateX)
-      const direction = resistedReveal > currentReveal
-        ? 'show'
-        : resistedReveal < currentReveal
-          ? 'hide'
-          : this.data.actionDirection
-      this.setData(Object.assign({ dragAxis: axis, dragging: true, translateX: -resistedReveal, actionDirection: direction }, actionMotion(resistedReveal, direction)))
+      const armed = rawReveal >= TRIGGER_THRESHOLD
+      const excess = Math.max(0, rawReveal - TRIGGER_THRESHOLD)
+      const reveal = excess ? TRIGGER_THRESHOLD + Math.pow(excess, RUBBER_BAND_POWER) : rawReveal
+      if (armed && !this.data.armed) wx.vibrateShort({ type: 'light' })
+      this.setData(Object.assign({
+        dragAxis: axis, dragging: true, gestureMoved: true, armed,
+        lastX: x, lastTime: event.timeStamp || Date.now(),
+      }, motion(reveal, this.data.maxReveal)))
     },
-    onTouchEnd() {
-      if (this.data.dragAxis !== 'horizontal') {
-        this.setData({ dragAxis: '' })
-        return
-      }
-      const reveal = Math.max(0, -this.data.translateX)
-      const level = reveal >= this.data.maxReveal / 2 ? 1 : 0
+    settle(level: number) {
       const target = level ? this.data.maxReveal : 0
-      const currentReveal = Math.max(0, -this.data.translateX)
-      const direction = target > currentReveal
-        ? 'show'
-        : target < currentReveal
-          ? 'hide'
-          : this.data.actionDirection
-      this.setData({ dragging: false, dragAxis: '', actionDirection: direction }, () => {
-        this.setData(Object.assign({ translateX: -target }, actionMotion(target, direction)), () => {
+      // Enable the shared transition before updating geometry; descendants resize with the rail.
+      this.setData({ dragging: false, armed: false, dragAxis: '' }, () => {
+        if (!liveComponents.has(this)) return
+        this.setData(motion(target, this.data.maxReveal), () => {
           this.triggerEvent('action', { type: 'swipe', id: this.data.note.id, level })
         })
       })
     },
+    onTouchEnd(event: WechatMiniprogram.TouchEvent) {
+      if (this.data.dragAxis !== 'horizontal') {
+        this.setData({ dragAxis: '' })
+        return
+      }
+      const changed = event.changedTouches && event.changedTouches[0]
+      const endX = changed ? touchX(changed) : this.data.lastX
+      const rawReveal = Math.max(0, -(this.data.startOffset + endX - this.data.startX))
+      // Velocity may choose an open/closed snap, but must never authorize deletion.
+      if (this.data.armed && rawReveal >= TRIGGER_THRESHOLD) {
+        wx.vibrateShort({ type: 'light' })
+        this.setData(Object.assign({ dragging: false, armed: false, dragAxis: '' }, motion(0, this.data.maxReveal)), () => {
+          this.triggerEvent('action', { type: 'delete', id: this.data.note.id })
+        })
+        return
+      }
+      const elapsed = Math.max(1, (event.timeStamp || Date.now()) - this.data.lastTime)
+      const projectedReveal = Math.max(0, -this.data.translateX - (endX - this.data.lastX) / elapsed * 120)
+      this.settle(projectedReveal >= EXPAND_THRESHOLD ? 1 : 0)
+    },
+    onTouchCancel() {
+      if (this.data.dragAxis === 'horizontal') this.settle(this.properties.revealLevel > 0 ? 1 : 0)
+      else this.setData({ dragAxis: '', armed: false })
+    },
     onPinTap() {
-      this.triggerEvent('action', { type: 'pin', id: this.data.note.id })
+      if (!this.data.gestureMoved) this.triggerEvent('action', { type: 'pin', id: this.data.note.id })
     },
     onDeleteTap() {
-      this.triggerEvent('action', { type: 'delete', id: this.data.note.id })
+      if (!this.data.gestureMoved) this.triggerEvent('action', { type: 'delete', id: this.data.note.id })
     },
   },
 })
