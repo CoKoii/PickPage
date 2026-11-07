@@ -26,7 +26,7 @@
 .audio-wave-row { margin-top: 12rpx; }
 .audio-wave-box { width: 100%; min-width: 0; height: 72rpx; display: flex; align-items: center; gap: 18rpx; padding: 0 18rpx; box-sizing: border-box; border: 1rpx solid #e2e5e3; border-radius: 20rpx; background: #fff; }
 .waveform { min-width: 0; flex: 1; height: 48rpx; display: flex; align-items: center; justify-content: flex-start; gap: 5rpx; overflow: hidden; }
-.wave-bar { width: 6rpx; min-width: 6rpx; flex: 0 0 6rpx; border-radius: 999rpx; background: #45c783; opacity: .78; transform: scaleY(1.15); transform-origin: center; }
+.wave-bar { width: 6rpx; min-width: 6rpx; flex: 0 0 6rpx; border-radius: 999rpx; background: #09c161; opacity: .78; transform: scaleY(1.15); transform-origin: center; }
 .audio-duration { flex: 0 0 auto; color: #686d6b; font-size: 22rpx; font-variant-numeric: tabular-nums; }
 .audio-transcript { margin-top: 10rpx; }
 .audio-content .note-meta { margin-top: 14rpx; }
