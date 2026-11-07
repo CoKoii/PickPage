@@ -9,10 +9,10 @@ type TouchEventWithPropagation = WechatMiniprogram.TouchEvent & {
 type ActionDirection = 'show' | 'hide'
 
 const actionMotion = (reveal: number, direction: ActionDirection) => ({
-  pinVisible: reveal >= (direction === 'show' ? 8 : 56),
-  deleteVisible: reveal >= (direction === 'show' ? 60 : 108),
-  pinDelay: direction === 'show' ? 40 : 180,
-  deleteDelay: direction === 'show' ? 210 : 0,
+  pinVisible: reveal >= (direction === 'show' ? 60 : 108),
+  deleteVisible: reveal >= (direction === 'show' ? 8 : 56),
+  pinDelay: direction === 'show' ? 100 : 110,
+  deleteDelay: direction === 'show' ? 20 : 0,
 })
 
 Component({
@@ -37,8 +37,8 @@ Component({
     actionDirection: 'show',
     pinVisible: false,
     deleteVisible: false,
-    pinDelay: 40,
-    deleteDelay: 210,
+    pinDelay: 100,
+    deleteDelay: 20,
     startX: 0,
     startY: 0,
     startOffset: 0,

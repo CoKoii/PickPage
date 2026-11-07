@@ -1,11 +1,11 @@
 .note-row { position: relative; width: 100%; overflow: hidden; border-radius: 25rpx; }
 .note-action-rail { position: absolute; z-index: 0; top: 0; right: 0; bottom: 0; width: 116px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; }
 .action-slot { width: 48px; height: 68px; flex: 0 0 48px; }
-.action-item { box-sizing: border-box; width: 48px; height: 68px; flex: 0 0 48px; line-height: normal; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; transform-origin: center center; transition: opacity 240ms cubic-bezier(.4,0,.2,1), transform 240ms cubic-bezier(.4,0,.2,1); }
+.action-item { box-sizing: border-box; width: 48px; height: 68px; flex: 0 0 48px; line-height: normal; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; transform-origin: center center; transition: opacity 200ms cubic-bezier(.4,0,.2,1), transform 200ms cubic-bezier(.4,0,.2,1); }
 .pin-action { color: #fff; }
 .delete-action { color: #fff; }
 .action-circle { width: 40px; height: 40px; flex: 0 0 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.pin-action .action-circle { background: #438dbd; }
+.pin-action .action-circle { background: #09c161; }
 .delete-action .action-circle { background: #f0444b; }
 .action-icon { width: 21px; height: 21px; }
 .action-label { color: #929795; font-size: 10px; line-height: 14px; white-space: nowrap; }

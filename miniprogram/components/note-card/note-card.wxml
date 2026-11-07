@@ -41,16 +41,16 @@
   </view>
 
   <view class="note-action-rail">
+    <view class="action-slot pin-slot">
+      <view class="action-item pin-action" style="opacity: {{pinVisible ? 1 : 0}}; transform: scale({{pinVisible ? 1 : 0}}); transition-delay: {{pinDelay}}ms;" bindtap="onPinTap" aria-role="button" aria-label="{{note.isPinned ? '取消置顶' : '置顶'}}">
+        <view class="action-circle"><image class="action-icon" src="/assets/png-icons/pin-white.png" mode="aspectFit" /></view>
+        <text class="action-label">{{note.isPinned ? '取消置顶' : '置顶'}}</text>
+      </view>
+    </view>
     <view class="action-slot delete-slot">
       <view class="action-item delete-action" style="opacity: {{deleteVisible ? 1 : 0}}; transform: scale({{deleteVisible ? 1 : 0}}); transition-delay: {{deleteDelay}}ms;" bindtap="onDeleteTap" aria-role="button" aria-label="删除">
         <view class="action-circle"><image class="action-icon" src="/assets/png-icons/trash-2.png" mode="aspectFit" /></view>
         <text class="action-label">删除</text>
-      </view>
-    </view>
-    <view class="action-slot pin-slot">
-      <view class="action-item pin-action" style="opacity: {{pinVisible ? 1 : 0}}; transform: scale({{pinVisible ? 1 : 0}}); transition-delay: {{pinDelay}}ms;" bindtap="onPinTap" aria-role="button" aria-label="{{note.isPinned ? '取消置顶' : '置顶'}}">
-        <view class="action-circle"><image class="action-icon" src="/assets/png-icons/bookmark.png" mode="aspectFit" /></view>
-        <text class="action-label">{{note.isPinned ? '取消置顶' : '置顶'}}</text>
       </view>
     </view>
   </view>
