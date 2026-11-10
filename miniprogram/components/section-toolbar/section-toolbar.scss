@@ -1,0 +1,6 @@
+.toolbar { width: 100%; min-width: 0; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 10rpx 18rpx; }
+.toolbar-title { min-width: 0; flex: 1; display: flex; align-items: center; gap: 7rpx; font-size: 34rpx; font-weight: 700; }
+.toolbar-label { max-width: 100%; white-space: nowrap; }
+.toolbar-actions { flex: 0 0 auto; display: flex; align-items: center; gap: 26rpx; }
+.toolbar-action { width: 44rpx; min-width: 44rpx; max-width: 44rpx; height: 44rpx; flex: 0 0 44rpx; box-sizing: border-box; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; }
+.toolbar-action::after { border: 0; }

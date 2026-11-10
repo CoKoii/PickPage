@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "home-header": "/components/home-header/home-header",
+    "section-toolbar": "/components/section-toolbar/section-toolbar",
+    "note-card": "/components/note-card/note-card",
+    "icon": "/components/icon/icon"
+  }
+}

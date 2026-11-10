@@ -1,0 +1,9 @@
+{
+  "desc": "Private and workspace notes are not indexed.",
+  "rules": [
+    {
+      "action": "disallow",
+      "page": "*"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+<view class="header" style="padding-top: {{topInset}}px;">
+  <view class="brand">
+    <view class="brand-mark"><icon name="notebook-pen-white" size="48" /></view>
+    <view class="brand-copy"><text class="brand-name">拾页</text><text class="brand-en">PickPage</text></view>
+  </view>
+</view>
